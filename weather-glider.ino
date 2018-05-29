@@ -12,6 +12,7 @@ Servo leftServo, rightServo;
 PID controller;
 unsigned long time;
 float initialHeight;
+Madgwick filter;
 
 void setup() {
 	delay(1000);

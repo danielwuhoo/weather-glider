@@ -2,6 +2,7 @@
 #include <CurieIMU.h>
 #include <MadgwickAHRS.h>
 
+extern Madgwick filter;
 float aX, aY, aZ, gX, gY, gZ;
 
 void initializeMotionSensor(){
