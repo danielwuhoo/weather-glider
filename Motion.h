@@ -2,5 +2,5 @@
 #define MOTION_H
 
 void initializeMotionSensor();
-void readSensors();
+void readSensors(char &roll, char &pitch, char &heading);
 

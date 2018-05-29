@@ -14,10 +14,10 @@ void initializeMotionSensor(){
  	
 }
 
-void readSensors(int &roll, int &pitch, int &heading){
+void readSensors(char &roll, char &pitch, char &heading){
 	CurieIMU.readMotionSensorScaled(aX, aY, aZ, gX, gY, gZ);
 	filter.updateIMU(gX, gY, gZ, aX, aY, aZ);
-    roll = (char) filter.getRoll();
-    pitch = (char) filter.getPitch();
-    heading = (char) filter.getYaw();
+	roll = (char) filter.getRoll();
+	pitch = (char) filter.getPitch();
+	heading = (char) filter.getYaw();
 }
