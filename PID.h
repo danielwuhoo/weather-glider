@@ -22,4 +22,6 @@ private:
 public:
 	PID();
 	void calculate(char rollError, char pitchError);
-}
+};
+
+void constrain(char &value, char max, char min);
