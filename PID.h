@@ -12,16 +12,20 @@
 #define MAX_PITCH 90
 #define MIN_PITCH -90
 
+#include <Servo.h>
+
 
 class PID{
 private:
 	char iRollMem, dRollError;
 	char iPitchMem, dPitchError;
 	char rollOut, pitchOut;
+	char leftAngle, rightAngle;
 
 public:
 	PID();
 	void calculate(char rollError, char pitchError);
+	void writeServos(Servo &left, Servo &right);
 };
 
 void constrain(char &value, char max, char min);

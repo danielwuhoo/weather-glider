@@ -9,10 +9,12 @@
 
 Adafruit_BMP280 bmp;
 Servo leftServo, rightServo;
-PID controller;
 unsigned long time;
 float initialHeight;
-Madgwick filter;
+Motion sensor;
+PID controller;
+char roll, pitch, heading;
+char rollSetpoint, pitchSetpoint;
 
 void setup() {
 	delay(1000);
@@ -20,11 +22,16 @@ void setup() {
   	rightServo.attach(11);
   	while (!bmp.begin());
   	initialHeight = bmp.readAltitude(SEA_LEVEL_PRESSURE);
-  	initializeMotionSensor();
+  	rollSetpoint = 0;
+  	pitchSetpoint = 0;
   
 }
 
 void loop() {
+
+	sensor.readSensors(roll, pitch, heading);
+	controller.calculate(roll - rollSetpoint, pitch - pitchSetpoint);
+	controller.writeServos(leftServo, rightServo);
 
 }
 

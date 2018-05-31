@@ -17,8 +17,23 @@ void PID::calculate(char rollError, char pitchError){
 	iPitchMem += P_PITCH_GAIN * pitchError;
 	constrain(iPitchMem, MAX_PITCH, MIN_PITCH);
 	pitchOut = (P_PITCH_GAIN * pitchError) + iPitchMem + (D_PITCH_GAIN * (pitchError - dPitchError));
-	constrain(rollOut, MAX_ROLL, MIN_ROLL);
+	constrain(rollOut, MAX_PITCH, MIN_PITCH);
 	dPitchError = pitchError;
+
+}
+
+void PID::writeServos(Servo &left, Servo &right){
+
+	if (rollOut + pitchOut + 90 >= 180){
+		leftAngle = 180;
+		rightAngle = 180;
+	} else{
+		leftAngle = pitchOut - rollOut + 110;
+		rightAngle = abs(abs(180 - rollOut - pitchOut) - 110);
+	}
+
+	left.write(leftAngle-20);
+	right.write(rightAngle+30);
 
 }
 
